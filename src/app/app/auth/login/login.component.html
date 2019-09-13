@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>Login</h2>
+    <h3>Welcome to Locker</h3>
+    <!-- <p>Please login to start your session</p> -->
+    <form #loginForm="ngForm" class="form-group" novalidate>
+        <label for="username">Username</label>
+        <input class="form-control" type="text" [(ngModel)]="user.username" placeholder="Username" name="username"
+            required #username="ngModel">
+        <div class="danger" *ngIf="username.invalid && username.dirty">
+            required field*
+        </div>
+        <label for="password">Password</label>
+        <input class="form-control" type="password" [(ngModel)]="user.password" placeholder="Password" name="password"
+            required #password="ngModel">
+        <div class="danger" [hidden]="password.valid || password.pristine">
+            required field*
+        </div>
+        <br>
+        <button [disabled]="loginForm.invalid" [hidden]="submitting" (click)="login()"
+            class="btn btn-primary">Login</button>
+        <button [hidden]="!submitting" class="btn btn-info">logging in...</button>
+    </form>
+    <p>Dont have an account?</p>
+    <p>
+        <a routerLink="/auth/register">Register here</a>
+    </p>
+    <p><a [routerLink]="['/auth/forgot-password']">forgot password?</a></p>
+</div>
+<!-- every keyword that are noted with # in templates are template variable -->
+<!-- to use the stored value within the template -->
+<!-- state of form and form's field  -->
+<!-- pristine ==> if we have not interacted yet -->
+<!-- dirty ==> interact -->
+<!-- valid ==> valid case required minLenght -->
+<!-- invalid ===> valid case are not fullfilled -->
+<!-- touched ===> visited-->
+<!-- untouched ===>  not visited-->

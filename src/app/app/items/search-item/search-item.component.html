@@ -1,0 +1,42 @@
+<div *ngIf = "!results.length">
+<h2>Search Item</h2>
+<form class="form-group" #itemForm="ngForm">
+  
+   <label for="category">category</label>
+   <select class="form-control" name="category" [(ngModel)]="item.category"
+   (change)="categorySelected(item.category)">
+
+            <option value="">select categories...</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+    </select>
+    <div>
+            <label for="name">Name</label>
+            <select name="name" class="form-control" [(ngModel)]="item.name">
+                <option value="">(Select Name)</option>
+                <option *ngFor="let name of names" [value]="name.name">{{name.name}}</option>
+            </select>
+        </div>
+
+    <label for="brand">brand</label>
+    <input class="form-control" type="text" placeholder="brand" name="brand" [(ngModel)]="item.brand">
+    <label for="color">color</label>
+    <input class="form-control" type="text" placeholder="color" name="color" [(ngModel)]="item.color">
+    <label for="quantity">quantity</label>
+    <input class="form-control" type="number" placeholder="quantity" name="quantity" [(ngModel)]="item.quantity">
+    <label for="modelNo">modelNo</label>
+    <input class="form-control" type="number" placeholder="modelNo" name="modelNo" [(ngModel)]="item.modelNo">
+    <label for="tags">tags</label>
+    <input class="form-control" type="text" placeholder="tags" name="tags" [(ngModel)]="item.tags">
+
+    <label for="minPrice">minPrice</label>
+    <input class="form-control" type="text" placeholder="minPrice" name="minPrice" [(ngModel)]="item.minPrice">
+    <label for="maxPrice">maxPrice</label>
+    <input class="form-control" type="text" placeholder="maxPrice" name="maxPrice" [(ngModel)]="item.maxPrice">
+   
+    <button (click)="submit()" *ngIf="!submitting" [disabled]="itemForm.invalid" class="btn btn-primary">submit</button>
+    <button disabled *ngIf="submitting" class="btn btn-info">searching...</button>
+</form>
+</div> 
+<div *ngIf="results.length">
+    <app-view-item [inputData] ="results" (searchagain)="resetSearch()"></app-view-item>
+</div>

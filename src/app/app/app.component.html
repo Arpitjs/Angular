@@ -1,0 +1,17 @@
+<p>I am root component</p>
+
+<div class="sidenav" *ngIf="isLoggedIn()">
+    <a [routerLink]="['/user/dashboard']">home</a>
+    <a [routerLink]="['/user/profile']">profile</a>
+    <a [routerLink]="['/item/add']">Add Item</a>
+    <a [routerLink]="['/item/view']">View Item</a>
+    <a [routerLink]="['/item/search']">Search Item</a>
+    <a [routerLink]="['/']">Change Password</a>
+    <button (click)="logout()" class="btn btn-info"> logout</button>
+</div>
+
+<div class="main">
+    <router-outlet></router-outlet>
+</div>
+
+<!-- place holder for all the components listed in routing configuration -->

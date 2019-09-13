@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>Register</h2>
+    <p>Please Register to start using Locker</p>
+    <form class="form-group" #registerForm="ngForm">
+        <label for="name">name</label>
+        <input class="form-control" type="text" name="name" placeholder="name" [(ngModel)]="user.name">
+        <label for="email">email</label>
+        <input class="form-control" type="text" name="email" placeholder="email" [(ngModel)]="user.email" required email
+            #email="ngModel">
+        <div class="danger" *ngIf="email.errors && email.dirty">
+            <div *ngIf="email.errors.required">
+                required field*
+            </div>
+            <div *ngIf="email.errors.email">
+                invalid email
+            </div>
+        </div>
+        <label for="username">username</label>
+        <input class="form-control" type="text" (focusout)="checkUsername()" name="username" placeholder="username" [(ngModel)]="user.username" 
+            required #username="ngModel">
+        <div class="danger" [hidden]="username.pristine || username.valid">
+            required field*
+        </div>
+        <label for="password">password</label>
+        <input class="form-control" type="password" name="password" placeholder="password" [(ngModel)]="user.password"
+            required minlength="6" #password="ngModel">
+        <div class="danger" *ngIf="password.dirty && password.errors">
+            <div *ngIf="password.errors.required">
+                required field*
+            </div>
+            <div *ngIf="password.errors.minlength">
+                weak password
+            </div>
+        </div>
+        <div *ngIf="password.valid">
+            show some tick mark
+        </div>
+        <label for="phoneNumber">phoneNumber</label>
+        <input class="form-control" type="text" name="phoneNumber" placeholder="phoneNumber"
+            [(ngModel)]="user.phoneNumber">
+        <label for="address">address</label>
+        <input class="form-control" type="text" name="address" placeholder="address" [(ngModel)]="user.address">
+        <label for="gender">gender</label>
+        <input class="form-control" type="text" name="gender" placeholder="gender" [(ngModel)]="user.gender">
+        <label for="dob">dob</label>
+        <input class="form-control" type="date" name="dob" placeholder="dob" [(ngModel)]="user.dob">
+        <br>
+        <button [disabled]="!registerForm.valid" (click)="submit()" *ngIf="!submitting"
+            class="btn btn-primary">subimt</button>
+        <button disabled *ngIf="submitting" class="btn btn-info">subimtting...</button>
+    </form>
+    <p><a routerLink="/auth/login">back to login</a></p>
+
+</div>
